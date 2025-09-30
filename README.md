@@ -60,11 +60,11 @@ Automated-TimeTable-IIITD/
 - The output Excel files with timetables will be saved in data/output/.
 ## Input Data Format
 - Courses.xlsx
-  -| CourseCode | CourseName | Batches | LTPSC | Professor | Semester | RoomType | LabType | Students_Per_Batch | Duration | Batch_Prof_Map |
+  - | CourseCode | CourseName | Batches | LTPSC | Professor | Semester | RoomType | LabType | Students_Per_Batch | Duration | Batch_Prof_Map |
 - Classrooms.xlsx
-  -| RoomCode | Type | Capacity | BatchAllowed |
+  - | RoomCode | Type | Capacity | BatchAllowed |
 - Professors.xlsx
-  -| Professor | Courses | AssignedHours | MaxHoursPerDay |
+  - | Professor | Courses | AssignedHours | MaxHoursPerDay |
 ##Sample YAML Configuration
 ```
 courses:
@@ -87,3 +87,13 @@ professors:
   - name: Prof. Smith
     courses: [CSE101, CSE102]
     max_hours_per_day: 4
+```
+## Future Work
+- Add a web interface to select courses and download timetables.
+- Generate PDF timetables for easier sharing.
+- Dynamically assign elective courses based on student enrollment.
+## Authors
+- [Sama Ruthveek Reddy](https://github.com/Srr28)
+- [RAVVA SWATI](https://github.com/RavvaSwati)
+- [SIDDHANT KUMAR](https://github.com/siddhantkumar101)
+- [YASHAS A S](https://github.com/Yashas-2005) 
