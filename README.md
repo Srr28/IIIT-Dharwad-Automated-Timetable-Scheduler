@@ -29,9 +29,6 @@ Automated-TimeTable-IIITD/
 │   ├── scheduler.py
 │   ├── utils.py
 │   └── config.py
-├── tests/                
-│   ├── test_scheduler.py
-│   └── test_utils.py
 ├── requirements.txt      
 └── README.md
 ```
