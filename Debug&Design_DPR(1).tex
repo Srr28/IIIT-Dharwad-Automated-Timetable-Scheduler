@@ -1,0 +1,720 @@
+\documentclass[12pt]{article}
+
+% Basic spacing and page setup
+\usepackage{setspace}
+\usepackage[a4paper,margin=1in]{geometry} % replaces obsolete a4 package
+\setlength{\parindent}{1.0cm}
+\onehalfspacing
+
+% Math and theorem environments
+\usepackage{amsmath,amssymb,amsthm,amsfonts,latexsym,mathrsfs,bm}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+
+% Tables
+\usepackage{array,tabularx,booktabs,longtable,multirow}
+\usepackage{nicematrix}
+\usepackage[thinlines]{easytable}
+\usepackage{threeparttable}
+\usepackage{tablefootnote}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{longtable}
+
+% Figures and captions
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage[font=footnotesize,justification=centering]{caption}
+\captionsetup[table]{labelsep=newline}
+\captionsetup[figure]{labelsep=period}
+\captionsetup[subfigure]{font=footnotesize}
+
+% Text & formatting
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage{microtype}
+
+% Bibliography
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+        T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Algorithms (choose one package: algorithmic OR algorithm2e)
+\usepackage{algorithm,algorithmic}
+
+% Listings for code
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+% Custom commands
+\newcommand*{\comb}[2]{{}^{#1}C_{#2}}%
+\newcommand{\RNum}[1]{\lowercase\expandafter{\romannumeral #1\relax}}
+
+\makeatletter
+\@dblfptop 0pt
+\makeatother
+
+
+
+
+
+
+\begin{document}
+
+\begin{titlepage}
+\clearpage
+\newpage
+\doublespacing
+
+\begin{center}
+\par {\large \textbf{Detailed Project Report}}\\
+\end{center}
+
+\begin{center}
+	\par {\large \textbf{on}}
+\end{center}
+
+\begin{center}
+{\Large \textbf{Automated Time-Table Scheduling for IIIT Dharwad}}
+\end{center}
+\begin{figure}[h]
+    \begin{center}
+    \includegraphics[width=.80in]{Debug&Design_Requirements.jpeg}
+    \end{center}
+\end{figure}
+{\small
+\begin{center}
+\par \small {Submitted by}
+\par \Large \textbf{Team: Debug \& Design}
+\par \Large \textbf{Sama Ruthveek Reddy} \textbf{24BCS128}
+\par \Large \textbf{Siddhant Kumar} \textbf{24BCS144}
+\par \Large \textbf{Yashas A S} \textbf{24BCS165}
+\par \Large \textbf{Ravva Swati} \textbf{24BCS118}
+\end{center}
+}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=.80in]{iiIT-Dharwad-Logo-horizontal-500x154[1].png} 
+\end{center}
+\end{figure}
+
+\begin{center}
+\par{\mbox {\small\textbf{DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING}}}
+\noindent{\mbox{\small \textbf{INDIAN INSTITUTE OF INFORMATION TECHNOLOGY DHARWAD}}}\\
+26/08/2025
+\end{center}
+\end{titlepage}
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+
+
+\newpage
+
+\newpage
+
+
+
+\section{Introduction}
+\pagenumbering{arabic}
+Managing academic timetables and seating arrangements is a complex and time-consuming task in any educational institution. At IIIT Dharwad, the scheduling process involves balancing multiple constraints such as faculty availability, course requirements, classroom and laboratory capacities, and ensuring that no clashes occur between courses. Traditionally, this process is carried out manually, which often leads to errors like overlapping classes, double-booked rooms, and difficulties in accommodating last-minute changes.
+
+In addition to timetable preparation, seating arrangements for lectures, laboratories, and especially examinations add another layer of complexity. Ensuring that students are seated in a systematic, fair, and rule-compliant manner while making optimal use of available resources is a major challenge when handled manually.
+
+To address these challenges, this project proposes the design and implementation of an Automated Timetable Scheduling and Seating Arrangement System. The software will generate optimized, conflict-free timetables while also providing automated seating plans for classes and examinations. By reducing manual effort, minimizing scheduling errors, and enabling flexibility to adapt to changes, the system will streamline academic operations and improve efficiency at IIIT Dharwad.
+
+
+\subsection{Challenges and Constraints}
+\section{Challenges}
+
+The development of an automated timetable scheduling and seating arrangement system 
+for IIIT Dharwad involves several challenges. Some of the key issues include:
+
+\begin{enumerate}
+    \item \textbf{Faculty Availability Conflicts:} Different faculty members have varied availability, making it difficult to schedule classes without clashes.
+    
+    \item \textbf{Course Requirements:} Some courses require specific classroom sizes or laboratory facilities, which must be matched correctly.
+    
+    \item \textbf{Resource Constraints:} Limited classrooms, labs, and time slots make it challenging to accommodate all courses efficiently.
+    
+    \item \textbf{Clash-Free Scheduling:} Avoiding overlapping classes for students enrolled in multiple courses is a major difficulty in timetable generation.
+    
+    \item \textbf{Dynamic Changes:} Last-minute changes such as faculty unavailability, rescheduled labs, or special lectures complicate the schedule.
+    
+    \item \textbf{Seating Arrangement Issues:} Allocating seats during exams requires ensuring fairness (e.g., avoiding seating students from the same department together). Additionally, adhering to rules such as distancing or roll-number-based seating adds more complexity.
+    
+    \item \textbf{Scalability:} As the number of students, courses, and classrooms increases, the system must still generate optimized schedules without delays.
+    
+    \item \textbf{User Adaptability:} Designing a user-friendly interface that can be easily used by faculty and administrative staff is crucial but challenging.
+\end{enumerate}
+
+\subsection{Available Infrastructure}
+
+IIIT Dharwad already has the facilities needed to make this system effective. The campus is equipped with lecture halls of different sizes, computer labs for programming courses, and specialized laboratories for electronics, mechanical systems, and embedded systems. Seminar halls are available for larger sessions or events.
+
+On the technical side, the institute has reliable LAN and Wi-Fi connectivity, along with servers that can host the scheduling software. Faculty and administrative staff have access to computers with the necessary productivity tools. Additionally, historical timetables, course structures, and the academic calendar are already available, providing the data needed for the system to work.
+
+\section{Existing System}
+
+At present, timetable scheduling at IIIT Dharwad is handled manually by the academic office in consultation with the Heads of Departments and faculty members. The process begins before the start of each semester, typically after the academic calendar is finalized. The scheduling coordinator collects information such as:
+
+\begin{itemize}
+    \item List of courses to be offered in the semester, along with credit structure.
+    \item Faculty assigned to each course and their preferred teaching slots.
+    \item Available classrooms, laboratories, and their seating capacities.
+    \item Lab equipment availability and special room requirements.
+    \item Batch or section divisions for large classes.
+\end{itemize}
+
+Once this data is gathered, the coordinator starts preparing a draft timetable, often using tools like Microsoft Excel or Google Sheets. This involves manually placing lectures, labs, and tutorials into a fixed weekly grid. Faculty preferences are cross-checked against available slots, and care is taken to avoid overlapping sessions for the same student batch or double-booking of classrooms.
+
+Similarly, examination seating arrangements are also handled manually by the examination cell. Before each exam, available classrooms and their capacities are listed, and students are allocated to seats in a way that minimizes chances of malpractice. This is generally done using spreadsheets, where roll numbers are mapped to specific rooms and benches. Invigilator duty lists are also prepared manually. This process is tedious and error-prone, especially during large-scale examinations with multiple parallel sessions.
+
+\subsection{Observed Challenges in Current Approach}
+
+Based on analysis of the present and previous semester practices for both timetable preparation and seating arrangements, several recurring challenges have been identified:
+
+\begin{enumerate}
+    \item \textbf{High dependency on human judgment:} The entire scheduling and seating logic resides in the experience of coordinators, making the process vulnerable to oversight and fatigue.
+    
+    \item \textbf{Clash resolution is iterative:} In timetables, conflicts such as overlapping labs or multiple classes scheduled for the same batch are detected only after the draft is circulated. In seating arrangements, errors like over-allocation of rooms or uneven student distribution often require revisions.
+    
+    \item \textbf{Limited optimization:} The manual approach often prioritizes feasibility over optimality. For timetables, this leads to uneven workload distribution (e.g., some days with many classes and others with very few). For seating, it may result in wasted classroom capacity or suboptimal invigilator allocation.
+    
+    \item \textbf{Inflexibility to changes:} Last-minute course additions, faculty substitutions, room reallocations, or sudden exam schedule changes require large portions of the timetable or seating plan to be redone.
+    
+    \item \textbf{Scaling difficulty:} With increasing student intake and course offerings, maintaining an error-free timetable and seating plan manually is becoming increasingly time-consuming and complex.
+\end{enumerate}
+
+
+\subsection{Example from Previous Semesters}
+
+The current semester timetable (Figure~\ref{fig:part1}) and the previous semester timetable (Figure~\ref{fig:placeholder}) illustrate these challenges. In the previous semester, for instance, multiple instances of parallel lab allocations for the same batch were observed, which had to be corrected manually after the start of classes. Similarly, in the present semester timetable, some faculty members have uneven teaching loads concentrated on certain days, which could have been balanced better with automated optimization.
+\begin{figure}[h!]
+    \centering
+    % First image
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{current_timetable1.png}
+        \caption{Current semester time table part-1}
+        \label{fig:part1}
+    \end{minipage}\hfill
+    % Second image
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{current_timetable2.png}
+        \caption{Current semester time table part-2}
+        \label{fig:part2}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{previous_timetable.png}
+    \caption{Previous semester time table}
+    \label{fig:placeholder}
+\end{figure}
+
+From these observations, it is evident that while the manual approach can produce a functioning timetable, it lacks the efficiency, flexibility, and optimization potential that a dedicated software solution can provide.
+\subsection{Example of previous semester exam seating arrangement}
+In previous semesters, the examination seating arrangement at IIIT Dharwad was prepared manually by the examination cell. Before each exam, the list of students registered for the course was obtained from the academic office. Available classrooms were identified along with their seating capacities, and students were then distributed across rooms using simple rules such as roll number sequence and department division. Typically, Excel sheets or handwritten charts were used to allocate students to seats in each room. Efforts were made to avoid placing consecutive roll numbers or students from the same branch on adjacent benches to minimize chances of malpractice.
+
+Once the initial allocation was completed, invigilators were assigned to rooms, usually one or two per classroom depending on the strength. The final seating charts were then printed and pasted outside classrooms on the day of the exam. While effective on a small scale, this manual process was time-consuming, prone to human error, and had to be redone whenever last-minute changes in student attendance or room availability occurred.
+\section{Requirements Modeling}
+\begin{figure}[h!]
+    \centering
+    % First image
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{seeting arrangment.png}
+        \caption{UML - Use Case Diagram for seating arrangement}
+        \label{fig:uml_seating}
+    \end{subfigure}
+    \hfill
+    % Second image
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{timetablw.png}
+        \caption{UML - Use Case Diagram for timetable}
+        \label{fig:uml_timetable}
+    \end{subfigure}
+    \caption{Use Case Diagrams}
+    \label{fig:uml_side_by_side}
+\end{figure}
+
+
+\subsection{List of Requirements}  
+ 
+\subsubsection{Requirements for Timetable Automation}
+
+\begin{longtable}{|p{4cm}|p{11cm}|} 
+\caption{Timetable Automation Requirements} \\ 
+\hline 
+\textbf{Requirement} & \textbf{Description (Input, Process, Output)} \\ 
+\hline 
+\endfirsthead 
+\multicolumn{2}{c}{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\ 
+\hline 
+\textbf{Requirement} & \textbf{Description} \\ 
+\hline 
+\endhead 
+\hline 
+\multicolumn{2}{r}{{Continued on next page}} \\ 
+\endfoot 
+\hline 
+\endlastfoot 
+
+Course Data Input & Input: Course details (code, name, credits, semester, faculty); Process: Store and validate course information; Output: Stored course records ready for scheduling. \\ 
+\hline 
+
+Faculty Constraints & Input: Faculty availability, preferred time slots, max hours; Process: Validate and store constraints; Output: Updated constraint database. \\ 
+\hline 
+
+Room and Lab Allocation & Input: Room/lab data (capacity, equipment, availability); Process: Assign rooms/labs based on requirements and constraints; Output: Room allocation details. \\ 
+\hline 
+
+Batch and Section Management & Input: Batch/section information; Process: Schedule courses for batches without clashes; Output: Batch-wise timetable allocation. \\ 
+\hline 
+
+Conflict Detection & Input: Tentative timetable; Process: Detect clashes in faculty, rooms, or batches; Output: Conflict report. \\ 
+\hline 
+
+Automatic Scheduling & Input: Validated data and constraints; Process: Generate optimized timetable using scheduling algorithms; Output: Preliminary timetable. \\ 
+\hline 
+
+Manual Adjustments & Input: Admin/faculty modifications; Process: Update timetable while respecting constraints; Output: Updated timetable. \\ 
+\hline 
+
+Optimization & Input: Validated timetable and resource data; Process: Adjust timetable to minimize conflicts and maximize resource utilization; Output: Optimized timetable. \\ 
+\hline 
+
+Timetable Visualization & Input: Generated timetable; Process: Convert timetable to readable formats; Output: Daily/weekly timetable view. \\ 
+\hline 
+
+Export Timetable & Input: Final timetable; Process: Convert to PDF/Excel/Image; Output: Exported files. \\ 
+\hline 
+
+Data Import & Input: External course/faculty files (CSV/Excel/DB); Process: Parse and validate data; Output: Populated database. \\ 
+\hline 
+
+Holiday and Event Handling & Input: Holiday, exam, and institute events; Process: Block affected slots in timetable; Output: Updated timetable constraints. \\ 
+\hline 
+
+Change Request Handling & Input: Faculty/admin change requests; Process: Resolve conflicts and update timetable; Output: Revised timetable. \\ 
+\hline 
+
+Notifications & Input: Finalized timetable; Process: Send notifications via email/portal; Output: Confirmation/alert to users. \\ 
+\hline 
+
+Reporting & Input: Timetable and utilization data; Process: Generate workload and utilization reports; Output: Summary reports for faculty, rooms, and batches. \\ 
+\hline
+
+\textbf{Non-Functional: Performance} & Timetable generation should complete within 1 minute. \\ 
+\hline
+\textbf{Non-Functional: Usability} & Interface should be intuitive and accessible to faculty and admin staff. \\ 
+\hline
+\textbf{Non-Functional: Reliability} & Generated timetable must be conflict-free and accurate. \\ 
+\hline
+\textbf{Non-Functional: Scalability} & System must handle increasing numbers of courses, faculty, departments, and students. \\ 
+\hline
+\textbf{Non-Functional: Security} & Ensure secure login and role-based access control for admin, faculty, and students. \\ 
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Requirements for Seating Arrangement Automation}
+
+\begin{longtable}{|p{4cm}|p{11cm}|} 
+\caption{Seating Arrangement Automation Requirements} \\ 
+\hline 
+\textbf{Requirement} & \textbf{Description (Input, Process, Output)} \\ 
+\hline 
+\endfirsthead 
+\multicolumn{2}{c}{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\ 
+\hline 
+\textbf{Requirement} & \textbf{Description} \\ 
+\hline 
+\endhead 
+\hline 
+\multicolumn{2}{r}{{Continued on next page}} \\ 
+\endfoot 
+\hline 
+\endlastfoot 
+
+Student Data Management & Input: Student roll numbers, departments, batches; Process: Import and manage student data; Output: Validated student database. \\ 
+\hline
+
+Room Data Management & Input: Classroom and lab details, seating capacity, availability; Process: Store and validate room data; Output: Room records for seating allocation. \\ 
+\hline
+
+Seating Plan Generation & Input: Exam schedule, student list, room capacities; Process: Allocate seats according to rules (roll number sequence, department separation); Output: Seating chart for exams. \\ 
+\hline
+
+Exam Schedule Integration & Input: Exam timetable; Process: Link exams with seating plan; Output: Session-wise seating allocations. \\ 
+\hline
+
+Invigilator Assignment & Input: Seating chart and exam regulations; Process: Allocate invigilators; Output: Invigilator duty list. \\ 
+\hline
+
+Report Generation & Input: Seating and invigilator data; Process: Generate printable outputs; Output: Room-wise seating charts and invigilator lists. \\ 
+\hline
+
+\textbf{Non-Functional: Performance} & Seating plan generation should complete within seconds, even for large student groups. \\ 
+\hline
+\textbf{Non-Functional: Usability} & Interface should be simple and user-friendly for exam coordinators. \\ 
+\hline
+\textbf{Non-Functional: Reliability} & Seating allocation must be fair and error-free. \\ 
+\hline
+\textbf{Non-Functional: Scalability} & System should support increasing numbers of students, rooms, and exams. \\ 
+\hline
+\textbf{Non-Functional: Security} & Student and exam data should be securely stored and accessible only to authorized users. \\ 
+\hline
+
+\end{longtable}
+
+
+
+\section{Software Design}
+
+This section presents the software design of the Automated Time-Table Scheduling system using Data Flow Diagrams (DFDs). The DFDs are constructed based on the requirements and structured analysis principles described in Sections 6.2 and 6.3 of "Fundamentals of Software Engineering" by Rajib Mall.
+
+\subsection{Level 0 DFD}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{level0.png} % replace with your DFD image
+    \caption{Context Diagram for Automated Time-Table Scheduling}
+\end{figure}
+
+\subsection{Level 1 DFD}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{level1.png} % replace with your DFD image
+    \caption{Level 1 DFD showing major functional processes}
+\end{figure}
+\subsection{Level 2 DFD}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{level2.png} % replace with your DFD image
+    \caption{Level 2 DFD showing major functional processes}
+\end{figure}
+\newpage
+
+
+\section{Data Dictionary}
+
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{8pt}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{0.28\textwidth}|
+                        >{\raggedright\arraybackslash}p{0.62\textwidth}|}
+\hline
+\textbf{Data Item} & \textbf{Definition} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Data Item} & \textbf{Definition} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+\multicolumn{2}{|c|}{\textbf{Primitive Data Items}} \\
+\hline
+Course\_Code & string /* Unique identifier for each course */ \\
+Course\_Name & string /* Full name of the course */ \\
+Credits & integer /* Number of credits for the course */ \\
+Semester & integer /* Semester in which the course is offered */ \\
+Faculty\_ID & string /* Unique identifier for faculty */ \\
+Faculty\_Name & string /* Faculty full name */ \\
+Department & string /* Department of faculty or course */ \\
+Room\_No & string /* Room identifier */ \\
+Capacity & integer /* Seating capacity of room */ \\
+Room\_Type & [LectureHall, Lab, TutorialRoom] /* Type of room */ \\
+Day & [Mon, Tue, Wed, Thu, Fri, Sat] /* Day of week */ \\
+Time\_Slot & string /* e.g. 09:00--10:00 */ \\
+Validation\_Status & [Valid, Conflict, Pending] /* Schedule validation */ \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Composite Data Items}} \\
+\hline
+Course\_Details & Course\_Code + Course\_Name + Credits + Semester + (Faculty\_ID) \newline
+/* Course information, faculty optional at initial stage */ \\
+Faculty\_Details & Faculty\_ID + Faculty\_Name + Department + \{Course\_Code\}* \newline
+/* Faculty with ID, name, dept, and zero or more assigned courses */ \\
+Room\_Details & Room\_No + Capacity + Room\_Type \newline
+/* Physical room details */ \\
+Schedule\_Entry & Course\_Code + Faculty\_ID + Room\_No + Day + Time\_Slot \newline
+/* Represents one scheduled class */ \\
+Provisional\_Timetable & \{Schedule\_Entry\}* \newline
+/* Unvalidated timetable, contains many schedule entries */ \\
+Final\_Timetable & Provisional\_Timetable + Validation\_Status \newline
+/* Provisional timetable after validation (conflicts resolved) */ \\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Data Flows}} \\
+\hline
+Input\_Data & \{Course\_Details\}* + \{Faculty\_Details\}* + \{Room\_Details\}* \newline
+/* Inputs collected from administration */ \\
+Generated\_Schedule & Provisional\_Timetable \newline
+/* System-generated draft timetable */ \\
+Validated\_Schedule & Final\_Timetable \newline
+/* Approved and conflict-free timetable */ \\
+\hline
+
+\caption{Data Dictionary for Automated Timetable Scheduling System (IIIT Dharwad)} \\
+
+\end{longtable}
+\newpage
+\section{High-Level Structural Design (LLD)}
+\begin{figure}[h!]
+    \centering
+    % First image
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{1.png}
+        
+        \label{fig:uml_seating}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{2.png}
+        
+        \label{fig:uml_seating}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{3.png}
+        
+        \label{fig:uml_seating}
+    \end{subfigure}
+    % Second image
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{4.png}
+        
+        \label{fig:uml_timetable}
+    \end{subfigure}
+    \caption{Model Structure}
+    \label{fig:uml_side_by_side}
+\end{figure}
+\newpage
+\section{Low-Level Structural Design (LLD)}
+
+\subsection{Data Structures}
+
+\subsubsection{Student Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    int studentID;
+    char name[50];
+    char branch[20];
+    int year;
+    char enrolledCourses[10][10];  // course codes
+} Student;
+\end{lstlisting}
+
+\subsubsection{Faculty Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    int facultyID;
+    char name[50];
+    char department[30];
+    char availability[40];   // slots e.g. "Mon-9-10"
+    int workload;            // hours per week
+} Faculty;
+\end{lstlisting}
+
+\subsubsection{Course Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    char courseCode[10];
+    char courseName[50];
+    int credits;
+    int isLab;               // 0 = theory, 1 = lab
+    int roomType;            // 0 = classroom, 1 = lab
+} Course;
+\end{lstlisting}
+
+\subsubsection{Timetable Slot Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    int slotID;
+    char day[10];            // e.g. "Monday"
+    char time[20];           // "09:00 - 10:00"
+    int facultyID;
+    char courseCode[10];
+    char room[20];
+} TimetableSlot;
+\end{lstlisting}
+
+\subsubsection{Exam Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    int examID;
+    char type[20];           // mid, end, backlog, etc.
+    char courseCode[10];
+    char date[15];
+    char time[20];
+    char room[20];
+} Exam;
+\end{lstlisting}
+
+\subsubsection{Notification Structure}
+\begin{lstlisting}[language=C]
+typedef struct {
+    int notificationID;
+    int recipientID;         // student or faculty ID
+    char message[100];
+    char timestamp[25];
+} Notification;
+\end{lstlisting}
+
+\subsection{Function Prototypes}
+
+\subsubsection{Authentication \& Validation}
+\begin{lstlisting}[language=C]
+int loginUser(char username[], char password[], char role[]);
+int validateStudent(Student s);
+int validateFaculty(Faculty f);
+int validateCourse(Course c);
+\end{lstlisting}
+
+\subsubsection{Data Management}
+\begin{lstlisting}[language=C]
+void addStudent(Student s);
+void updateStudent(int studentID, Student s);
+void deleteStudent(int studentID);
+
+void addFaculty(Faculty f);
+void updateFaculty(int facultyID, Faculty f);
+void deleteFaculty(int facultyID);
+
+void addCourse(Course c);
+void updateCourse(char courseCode[], Course c);
+void deleteCourse(char courseCode[]);
+\end{lstlisting}
+
+\subsubsection{Timetable Generation}
+\begin{lstlisting}[language=C]
+void generateClassTimetable();
+int assignFacultyToCourse(int facultyID, char courseCode[], char slot[]);
+int checkConflict(int facultyID, char slot[]);
+\end{lstlisting}
+
+\subsubsection{Exam Timetable \& Seating}
+\begin{lstlisting}[language=C]
+void generateExamTimetable();
+void allocateSeating(int examID);
+void assignInvigilator(int examID, int facultyID);
+\end{lstlisting}
+
+\subsubsection{Notifications}
+\begin{lstlisting}[language=C]
+void sendNotification(int recipientID, char message[]);
+void notifyScheduleUpdate(int studentID, int facultyID);
+\end{lstlisting}
+
+\subsubsection{Reports \& Export}
+\begin{lstlisting}[language=C]
+void exportTimetablePDF();
+void exportExamScheduleExcel();
+\end{lstlisting}
+
+\subsubsection{Utility Functions}
+\begin{lstlisting}[language=C]
+void backupData();
+void restoreData();
+void logActivity(char message[]);
+\end{lstlisting}
+
+\section{Coding / Implementation Details (Timetable Automation Only)}
+
+\textbf{Tech Stack:}
+
+\begin{itemize}
+    \item \textbf{Language:} Python 3.x
+    \item \textbf{Libraries/Frameworks:}
+    \begin{itemize}
+        \item \textbf{pandas} – for data manipulation and handling tabular data.
+        \item \textbf{NumPy} – for array operations and numerical computations (if required).
+        \item \textbf{Standard Python libraries:} \texttt{csv}, \texttt{datetime}, \texttt{os}.
+    \end{itemize}
+    \item \textbf{Tools:}
+    \begin{itemize}
+        \item \textbf{Git} – version control.
+        \item \textbf{GitHub/GitLab} – project repository hosting and collaboration.
+        \item \textbf{Visual Studio Code} / \textbf{PyCharm} – IDE/editor for development.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Implementation Approach:}
+\begin{enumerate}
+    \item \textbf{Data Input:} Timetable configuration data (courses, faculty, rooms, slots) is stored in CSV files for easy import using \texttt{pandas}.
+    \item \textbf{Validation:} Scripts verify input data consistency (e.g., no duplicate course codes, valid room assignments).
+    \item \textbf{Scheduling Algorithm:} The timetable generation algorithm detects conflicts (faculty, room, or batch) and assigns slots optimally.
+    \item \textbf{Output:} Final timetable is exported in both human-readable (Excel/PDF) and machine-readable (CSV/JSON) formats.
+    \item \textbf{Versioning:} Git tracks development progress, ensuring reproducibility and collaboration.
+\end{enumerate}
+
+\textbf{Sample Workflow:}
+\begin{enumerate}
+    \item Load configuration data from \texttt{courses.csv}, \texttt{faculty.csv}, and \texttt{rooms.csv}.
+    \item Apply scheduling logic to generate a clash-free provisional timetable.
+    \item Validate results and resolve conflicts (if any).
+    \item Export final timetable for faculty and student use.
+\end{enumerate}
+
+\section{Conclusion}
+
+The preparation of academic timetables and examination seating arrangements at IIIT Dharwad is a complex and labor-intensive process when performed manually. The current approach relies heavily on human judgment, iterative conflict resolution, and spreadsheets, which often results in scheduling conflicts, inefficient resource utilization, and difficulty accommodating last-minute changes. The growing number of courses, faculty, and students further amplifies these challenges.
+
+By applying structured analysis and modeling the system using Data Flow Diagrams (DFDs), an automated timetable and seating arrangement system can overcome these limitations. The use of DFDs ensures that every functional requirement—such as course input, faculty constraints, clash detection, and seating allocation—is systematically analyzed and mapped to corresponding processes. This structured approach enables clash-free scheduling, optimized allocation of classrooms and faculty, and efficient utilization of seating resources.
+
+Furthermore, a DFD-based design allows for modular decomposition of complex processes into manageable sub-processes, making it easier to implement, maintain, and adapt to changes. Automation also reduces human effort, increases accuracy, and supports scalability as the academic workload grows. Overall, a requirements-driven, DFD-guided system not only streamlines administrative tasks but also ensures fairness, transparency, and flexibility for academic operations at IIIT Dharwad.
+
+\section{References}
+\begin{thebibliography}{9}
+
+\bibitem{mall2018}
+Rajib Mall, \textit{Fundamentals of Software Engineering}, 5th Edition, PHI Learning, 2018.
+
+\end{thebibliography}
+
+\end{document}
