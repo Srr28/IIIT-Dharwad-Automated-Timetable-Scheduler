@@ -18,6 +18,7 @@ It takes course, classroom, and professor data as input and produces conflict-fr
 
 ## Folder Structure
 Automated-TimeTable-IIITD/
+
 ├── data/
 
 │ ├── courses.xlsx
