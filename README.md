@@ -38,3 +38,4 @@ Automated-TimeTable-IIITD/
 ├── requirements.txt      
 └── README.md
 ```
+## Requirement
