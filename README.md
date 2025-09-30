@@ -39,3 +39,51 @@ Automated-TimeTable-IIITD/
 └── README.md
 ```
 ## Requirement
+- Python 3.10+
+- Packages
+  - pandas
+  - numpy
+  - openpyxl
+## Installation
+- Clone the repository
+  ```
+  git clone <repo_url>
+  cd Automated-TimeTable-IIITD
+- Install dependencies
+  ```
+  pip install -r requirements.txt
+## Usage
+- Run the main script to generate timetables:
+  ```
+  python src/main.py
+
+- The output Excel files with timetables will be saved in data/output/.
+## Input Data Format
+- Courses.xlsx
+  -| CourseCode | CourseName | Batches | LTPSC | Professor | Semester | RoomType | LabType | Students_Per_Batch | Duration | Batch_Prof_Map |
+- Classrooms.xlsx
+  -| RoomCode | Type | Capacity | BatchAllowed |
+- Professors.xlsx
+  -| Professor | Courses | AssignedHours | MaxHoursPerDay |
+##Sample YAML Configuration
+```
+courses:
+  - code: CSE101
+    name: Data Structures
+    batches: [A, B]
+    ltpsc: [3, 0, 0, 0, 2]  # L, T, P, S, C
+    professor: Prof. Smith
+    semester: 1
+    room_type: Lecture
+    students_per_batch: [60, 55]
+
+classrooms:
+  - room_code: C101
+    type: Lecture
+    capacity: 60
+    batch_allowed: [A, B]
+
+professors:
+  - name: Prof. Smith
+    courses: [CSE101, CSE102]
+    max_hours_per_day: 4
