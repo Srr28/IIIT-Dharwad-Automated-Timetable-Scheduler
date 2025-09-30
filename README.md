@@ -34,10 +34,11 @@ Automated-TimeTable-IIITD/
 ```
 ## Requirement
 - Python 3.10+
-- Packages
-  - pandas
-  - numpy
-  - openpyxl
+  - pandas>=2.0.0
+  - numpy>=1.24.0
+  - openpyxl>=3.1.0
+  - pytest>=7.4.0
+
 ## Installation
 - Clone the repository
   ```
