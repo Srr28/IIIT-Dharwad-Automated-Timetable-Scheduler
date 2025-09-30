@@ -17,13 +17,12 @@ It takes course, classroom, and professor data as input and produces conflict-fr
 ---
 
 ## Folder Structure
-```text
 Automated-TimeTable-IIITD/
 ├── data/                 
 │   ├── courses.xlsx
 │   ├── classrooms.xlsx
 │   ├── professors.xlsx
-│   └── output/          # Generated timetable Excel files
+│   └── output/          
 ├── src/                  
 │   ├── main.py
 │   ├── scheduler.py
