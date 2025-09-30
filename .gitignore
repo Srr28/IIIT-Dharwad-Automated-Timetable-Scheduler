@@ -1,1 +1,12 @@
+# Python
+   __pycache__/
+   *.py[cod]
+   venv/
 
+   # Data files
+   data/*.xlsx
+   data/output/
+
+   # IDE & OS
+   .vscode/
+   .DS_Store
