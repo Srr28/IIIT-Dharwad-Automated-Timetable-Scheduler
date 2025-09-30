@@ -17,12 +17,13 @@ It takes course, classroom, and professor data as input and produces conflict-fr
 ---
 
 ## Folder Structure
+```text
 Automated-TimeTable-IIITD/
 ├── data/                 
 │   ├── courses.xlsx
 │   ├── classrooms.xlsx
 │   ├── professors.xlsx
-│   └── output/          
+│   └── output/          # Generated timetable Excel files
 ├── src/                  
 │   ├── main.py
 │   ├── scheduler.py
@@ -35,22 +36,5 @@ Automated-TimeTable-IIITD/
 │   ├── test_scheduler.py
 │   └── test_utils.py
 ├── requirements.txt      
-└── README.md             
-
-
----
-
-## Requirements
-- Python 3.10+  
-- Packages:
-  pandas
-  numpy
-  openpyxl
-
----
-
-## Installation
-1. Clone the repository:
-```bash
-git clone <repo_url>
-cd Automated-TimeTable-IIITD
+└── README.md
+```
