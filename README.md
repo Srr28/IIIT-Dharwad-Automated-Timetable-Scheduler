@@ -21,34 +21,34 @@ Automated-TimeTable-IIITD/
 
 ├── data/
 
-│   ├── courses.xlsx
+│     ├── courses.xlsx
 
-│   ├── classrooms.xlsx
+│     ├── classrooms.xlsx
 
-│   └── professors.xlsx
+│     └── professors.xlsx
 
 ├── src/
 
-│   ├── main.py
+│     ├── main.py
 
-│   ├── scheduler.py
+│     ├── scheduler.py
 
-│   ├── utils.py
+│     ├── utils.py
 
-│   └── config.py
+│     └── config.py
 
 ├── docs/
 
-│   ├── slides.pdf
+│     ├── slides.pdf
 
-│   └── design_notes.md
+│     └── design_notes.md
 
 ├── tests/
 
 
-│   ├── test_scheduler.py
+│     ├── test_scheduler.py
 
-│   └── test_utils.py
+│     └── test_utils.py
 
 ├── requirements.txt
 
