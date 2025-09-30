@@ -17,42 +17,27 @@ It takes course, classroom, and professor data as input and produces conflict-fr
 ---
 
 ## Folder Structure
+```text
 Automated-TimeTable-IIITD/
+├── data/                 
+│   ├── courses.xlsx
+│   ├── classrooms.xlsx
+│   ├── professors.xlsx
+│   └── output/          # Generated timetable Excel files
+├── src/                  
+│   ├── main.py
+│   ├── scheduler.py
+│   ├── utils.py
+│   └── config.py
+├── docs/                 
+│   ├── slides.pdf
+│   └── design_notes.md
+├── tests/                
+│   ├── test_scheduler.py
+│   └── test_utils.py
+├── requirements.txt      
+└── README.md             
 
-├── data/
-
-│     ├── courses.xlsx
-
-│     ├── classrooms.xlsx
-
-│     └── professors.xlsx
-
-├── src/
-
-│     ├── main.py
-
-│     ├── scheduler.py
-
-│     ├── utils.py
-
-│     └── config.py
-
-├── docs/
-
-│     ├── slides.pdf
-
-│     └── design_notes.md
-
-├── tests/
-
-
-│     ├── test_scheduler.py
-
-│     └── test_utils.py
-
-├── requirements.txt
-
-└── README.md
 
 ---
 
